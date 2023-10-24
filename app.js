@@ -487,6 +487,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Convert the object to a JSON string and store it in sessionStorage, stores the entire array in sessionStorage
     sessionStorage.setItem('sesh', JSON.stringify(session));
+    let key = sessionStorage.key(1);
+    let valueString = sessionStorage.getItem(key);
+    let value = JSON.parse(valueString);
+    console.log(`over here: ${value}`)
  
     
     
