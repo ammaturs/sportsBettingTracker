@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
         let key = sessionStorage.key(1);
         let valueString = sessionStorage.getItem(key);
         let value = JSON.parse(valueString);
+        console.log(value)
         for (let i =0; i<value.length; i++)
         {
             console.log(`heyy`);
