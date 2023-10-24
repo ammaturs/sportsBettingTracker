@@ -7,7 +7,7 @@ let session = [];
 document.addEventListener('DOMContentLoaded', function() {
     
     //check if theres a session
-    console.log('loaded7')
+    console.log('loaded8')
     if (sessionStorage.length>1){
         let key = sessionStorage.key(1);
         let valueString = sessionStorage.getItem(key);
@@ -317,7 +317,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 //player image
                 const imgElement = document.createElement('img');
-                imgElement.src = `images/${playerID}.jpg`;
+                imgElement.src = `http://nhl.bamcontent.com/images/headshots/current/168x168/${playerID}.jpg`
                 entry2.appendChild(imgElement);
                 console.log('passed')
 
@@ -421,7 +421,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     //player image
     const imgElement = document.createElement('img');
-    imgElement.src = `images/${playerID}.jpg`;
+    imgElement.src = `http://nhl.bamcontent.com/images/headshots/current/168x168/${playerID}.jpg`
     entry.appendChild(imgElement);
     console.log('passed')
 
