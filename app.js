@@ -318,6 +318,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const imgElement = document.createElement('img');
                 imgElement.src = `images/${playerID}.jpg`;
                 entry2.appendChild(imgElement);
+                console.log('passed')
 
                 // Set the inner HTML of the bet data div which is a child of the entry div 
                 data.innerHTML = `<span id=bet_entry> <strong> ${human} &nbsp &nbsp &nbsp &nbsp</strong> <strong> &nbsp</strong> ${wager}${val} &nbsp<span style= text-transform:capitalize;>${menu}</span> </span>`;
@@ -425,6 +426,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const imgElement = document.createElement('img');
     imgElement.src = `images/${playerID}.jpg`;
     entry.appendChild(imgElement);
+    console.log('passed')
 
     // Set the inner HTML of the bet data div which is a child of the entry div 
     data.innerHTML = `<span id=bet_entry> <strong> ${human} &nbsp &nbsp &nbsp &nbsp</strong> <strong> &nbsp</strong> ${wager}${val} &nbsp<span style= text-transform:capitalize;>${menu}</span> </span>`;
