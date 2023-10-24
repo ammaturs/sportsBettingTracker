@@ -460,6 +460,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
    // Convert the object to a JSON string and store it in sessionStorage, stores the entire array in sessionStorage
    sessionStorage.setItem('sesh', JSON.stringify(session));
+
+   let key = sessionStorage.key(1);
+   let valueString = sessionStorage.getItem(key);
+   let value = JSON.parse(valueString);
+   console.log(`here: ${valueString}`)
    
    x.addEventListener('click', function() {
        // Code to be executed when the button is clicked
@@ -482,13 +487,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Append the entry div to the document body
     document.querySelector('.bets').appendChild(entry);
-    
-
-
-    // Convert the object to a JSON string and store it in sessionStorage, stores the entire array in sessionStorage
-    sessionStorage.setItem('sesh', JSON.stringify(session));
-    console.log(`here: ${valueString}`)
- 
     
     
     document.querySelector('#player').value='';
