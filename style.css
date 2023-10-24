@@ -91,8 +91,9 @@
 
 #progress{
   font-weight: bold;
-  font-size: 80px;
+  font-size: 60px;
   align-items: right;
+  width:20%;
 
 }
 
@@ -104,4 +105,5 @@
 #bet_entry{
   display:block;
   font-size: 30px;
+  width:100%;
 }
