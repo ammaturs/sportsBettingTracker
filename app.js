@@ -7,7 +7,7 @@ let session = [];
 document.addEventListener('DOMContentLoaded', function() {
     
     //check if theres a session
-    console.log('loaded9')
+    console.log('loaded10')
     if (sessionStorage){
         let key = sessionStorage.key(0);
         let valueString = sessionStorage.getItem(key);
@@ -348,7 +348,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 entry2.appendChild(x);
                 
 
-                let key = sessionStorage.key(1);
+                let key = sessionStorage.key(0);
                 let valueString = sessionStorage.getItem(key);
                 let value = JSON.parse(valueString);
 
@@ -457,7 +457,7 @@ document.addEventListener('DOMContentLoaded', function() {
    // Convert the object to a JSON string and store it in sessionStorage, stores the entire array in sessionStorage
    sessionStorage.setItem('sesh', JSON.stringify(session));
 
-   let key = sessionStorage.key(1);
+   let key = sessionStorage.key(0);
    let valueString = sessionStorage.getItem(key);
    let value = JSON.parse(valueString);
    console.log(`here: ${valueString}`)
