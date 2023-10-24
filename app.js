@@ -7,9 +7,9 @@ let session = [];
 document.addEventListener('DOMContentLoaded', function() {
     
     //check if theres a session
-    console.log('loaded8')
-    if (sessionStorage.length>1){
-        let key = sessionStorage.key(1);
+    console.log('loaded9')
+    if (sessionStorage){
+        let key = sessionStorage.key(0);
         let valueString = sessionStorage.getItem(key);
         let value = JSON.parse(valueString);
         console.log(`here: ${value}`)
