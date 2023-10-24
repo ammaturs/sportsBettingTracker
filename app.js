@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const stat = document.querySelector('#stat').value;
 
     //if the user left fields blank, alert them
-    if (!human || menu === 'q' || wager === 'prop' || !stat) {
+    if (!human || menu == 'What are we betting on?' || wager == 'Prop' || !stat) {
         alert('Please fill out all fields.');
         return; // Do not proceed further
     }
