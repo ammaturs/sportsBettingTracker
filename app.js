@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
         let value = JSON.parse(valueString);
         for (let i =0; i<value.length; i++)
         {
-            //console.log(`${i+1}) ${value[i].player}`);
+            console.log(`heyy`);
             loadSession(value[i]);
         }
     }
