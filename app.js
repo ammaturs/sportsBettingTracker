@@ -7,7 +7,7 @@ let session = [];
 document.addEventListener('DOMContentLoaded', function() {
     
     //check if theres a session
-    console.log('loaded6')
+    console.log('loaded7')
     if (sessionStorage.length>1){
         let key = sessionStorage.key(1);
         let valueString = sessionStorage.getItem(key);
@@ -390,10 +390,6 @@ document.addEventListener('DOMContentLoaded', function() {
   function loadPlayer(update, playerID)
   {
     console.log('loadPlayer');
-
-    let key = sessionStorage.key(1);
-    let valueString = sessionStorage.getItem(key);
-    let value = JSON.parse(valueString);
 
     const human = document.querySelector('#player').value; //specified player
     const menu = document.querySelector('#menu').value; //shots? goals? assists?
