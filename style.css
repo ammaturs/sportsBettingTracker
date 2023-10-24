@@ -19,7 +19,7 @@
 }
 
 #player{
-  width:15em;
+  width:100%;
   height:3em;
   margin-bottom: -20px;
 }
@@ -49,7 +49,7 @@
 }
 
 #menu{
-  width:15em;
+  width:20%;
   height:3em;
   font-size: 16px;
 
@@ -60,13 +60,13 @@
 }
 
 #wager{
-  width:10em;
+  width:15%;
   font-size: 16px;
   height:3em;
 }
 
 #stat{
-  width:10em;
+  width:13%;
   height:3em;
 }
 
