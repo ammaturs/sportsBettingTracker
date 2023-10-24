@@ -85,6 +85,12 @@
  
 }
 
+.image_style
+{
+  height:20%;
+  width:15%;
+}
+
 .player_info{
   display: flex;
 }
