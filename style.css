@@ -110,6 +110,7 @@
 #close_bet{
   align-items: right;
   justify-content: end;
+  width:5%;
 }
 
 #bet_entry{
