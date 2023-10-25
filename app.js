@@ -5,8 +5,8 @@ document.addEventListener('DOMContentLoaded', function() {
     
     //check if theres a session
     
-    if (sessionStorage.length>1){
-        let key = sessionStorage.key(1);
+    if (sessionStorage.length>0){
+        let key = sessionStorage.key(0);
         let valueString = sessionStorage.getItem(key);
         let value = JSON.parse(valueString);
         for (let i = 0; i<value.length; i++)
@@ -446,7 +446,7 @@ function loadSession(obj)
                 entry2.appendChild(x);
                 
 
-                let key = sessionStorage.key(1);
+                let key = sessionStorage.key(0);
                 let valueString = sessionStorage.getItem(key);
                 let value = JSON.parse(valueString);
 
@@ -580,7 +580,7 @@ function loadSession(obj)
    // Convert the object to a JSON string and store it in sessionStorage, stores the entire array in sessionStorage
    sessionStorage.setItem('sesh', JSON.stringify(session));
 
-   let key = sessionStorage.key(1);
+   let key = sessionStorage.key(0);
    let valueString = sessionStorage.getItem(key);
    let value = JSON.parse(valueString);
 
