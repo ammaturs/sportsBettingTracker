@@ -6,7 +6,7 @@
 
 .bet{
   display: inline-flex;
-  text-align: center; /* Align text content at the center */
+  text-align: center; 
   justify-content: center;
   padding:10px;
   width:100%;
@@ -17,7 +17,6 @@
   justify-content: center;
   align-items: center;
   margin:5px;
-  
 }
 
 #player{
@@ -43,7 +42,6 @@
 
 .autocomplete-list li{
   border-bottom: 1px solid lightgrey;
-  
   padding: 8px;
   align-items: left;
   justify-content: left;
@@ -58,7 +56,7 @@
 }
 
 .dropdown{
-  width:43%;
+  width:50%;
   display:block;
 }
 
@@ -79,12 +77,12 @@
 }
 
 .bet_border {
-  border: 1px solid grey; /* You can adjust the border style as needed */
+  border: 1px solid grey; 
   margin:1px;
-  height:11%;
+  height:30%;
   width:100%;
-  display: flex;
   justify-content: space-between;
+  display:flex;
  
 }
 
@@ -92,31 +90,56 @@
 {
   height:100%;
   width:20%;
+  align-items: left;
+  margin-left:1%;
 }
 
-.player_info{
-  display: flex;
-}
 
-#progress{
+.bet_progress{
   font-weight: bold;
-  font-size: 400%;
-  align-items: right;
+  font-size: 500%;
+  margin-top: 2%;;
   width:20%;
-
+  text-align: left;
+  
 
 }
 
-#close_bet{
+.close_bet{
   align-items: right;
   justify-content: end;
+  margin-top: 0.2%;
+  margin-right:0.2%;
   height:100%;
-  width:5%;
+  width:10%;
+  text-align: right;
+
+  
 }
 
-#bet_entry{
+
+.info_entry{
   display:block;
-  font-size: 80%;
-  width:100%;
-  margin-right:90%;
+  margin-left:5%;
+  width:100%
+  
 }
+
+.bet_entry{
+  display:flex;
+  font-size: 100%;
+  width:100%;
+  
+}
+
+.period_entry{
+  font-size: 90%;
+  width:100%;
+}
+
+
+.entire_entry{
+  display:'block';
+  height:100%;
+}
+
