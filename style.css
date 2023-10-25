@@ -100,7 +100,7 @@
 
 #progress{
   font-weight: bold;
-  font-size: 80%;
+  font-size: 700%;
   align-items: right;
   width:20%;
 
@@ -110,6 +110,7 @@
 #close_bet{
   align-items: right;
   justify-content: end;
+  height:100%;
   width:5%;
 }
 
@@ -117,4 +118,5 @@
   display:block;
   font-size: 80%;
   width:100%;
+  margin-right:90%;
 }
