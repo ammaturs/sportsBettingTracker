@@ -394,7 +394,7 @@ function loadSession(obj)
 
                 //player image
                 const imgElement = document.createElement('img');
-                imgElement.src = `images/${playerID}.jpg`;
+                imgElement.src = `http://nhl.bamcontent.com/images/headshots/current/168x168/${playerID}.jpg`;
                 imgElement.classList.add('image_style');
                 entry2.appendChild(imgElement);
 
@@ -524,7 +524,7 @@ function loadSession(obj)
 
     //player image
     const imgElement = document.createElement('img');
-    imgElement.src = `images/${playerID}.jpg`;
+    imgElement.src = `http://nhl.bamcontent.com/images/headshots/current/168x168/${playerID}.jpg`;
     imgElement.classList.add('image_style');
     entry.appendChild(imgElement);
 
