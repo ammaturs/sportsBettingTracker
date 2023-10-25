@@ -168,7 +168,7 @@ document.addEventListener('DOMContentLoaded', function() {
         let human = document.querySelector('#player').value;
         const menu = document.querySelector('#menu').value;
         let update;
-        let period_interval, period_time;
+        let period_interval, period_time, convertedTime;
 
         fetch(`https://statsapi.web.nhl.com/api/v1/game/${gameID}/feed/live`)
         .then(response => response.json())
