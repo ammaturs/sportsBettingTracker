@@ -332,10 +332,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 //set the inner html of the progress of the bet div which is a child of the entry div
                 if (update === undefined)
                 {
-                    progress.innerHTML= `<span id = progress>0 out of ${val}</span>`;
+                    progress.innerHTML= `<span id = progress>0</span>`;
                 }
                 else{
-                    progress.innerHTML= `<span id = progress>${update} out of ${val}</span>`;
+                    progress.innerHTML= `<span id = progress>${update}</span>`;
                 }
 
                 progress.style.textAlign = 'right';
@@ -437,10 +437,10 @@ document.addEventListener('DOMContentLoaded', function() {
     //set the inner html of the progress of the bet div which is a child of the entry div
    if (update === undefined)
    {
-    progress.innerHTML= `<span id = progress>0 out of ${val}</span>`;
+    progress.innerHTML= `<span id = progress>0</span>`;
    }
    else{
-    progress.innerHTML= `<span id = progress>${update} out of ${val}</span>`;
+    progress.innerHTML= `<span id = progress>${update}</span>`;
    }
 
    progress.style.textAlign = 'right';
