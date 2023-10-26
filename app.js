@@ -4,8 +4,8 @@ document.addEventListener('DOMContentLoaded', function() {
     
     //check if theres a session
     
-    if (sessionStorage.length>1){
-        let key = sessionStorage.key(1);
+    if (sessionStorage.length>0){
+        let key = sessionStorage.key(0);
         let valueString = sessionStorage.getItem(key);
         let value = JSON.parse(valueString); //an array of objects
 
@@ -485,7 +485,7 @@ function loadSession(obj)
                 entry2.appendChild(x);
                 
 
-                let key = sessionStorage.key(1);
+                let key = sessionStorage.key(0);
                 let valueString = sessionStorage.getItem(key);
                 let value = JSON.parse(valueString);
                 
@@ -528,7 +528,7 @@ function loadSession(obj)
   function loadPlayer(update, playerID, period_interval, period_time, convertedTime, away_score, home_score, whos_winning)
   {
 
-    let a = sessionStorage.key(1);
+    let a = sessionStorage.key(0);
     let b = sessionStorage.getItem(a);
     let c = JSON.parse(b);
     
@@ -636,7 +636,7 @@ function loadSession(obj)
    sessionStorage.setItem('sesh', JSON.stringify(session));
  
 
-   let key = sessionStorage.key(1);
+   let key = sessionStorage.key(0);
    let valueString = sessionStorage.getItem(key);
    let value = JSON.parse(valueString);
    
