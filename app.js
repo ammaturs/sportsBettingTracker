@@ -1,19 +1,20 @@
 let session = [];
-//sessionStorage.clear()
 
 document.addEventListener('DOMContentLoaded', function() {
     
     //check if theres a session
     
-    if (sessionStorage.length>0){
-        let key = sessionStorage.key(0);
+    if (sessionStorage.length>1){
+        let key = sessionStorage.key(1);
         let valueString = sessionStorage.getItem(key);
-        let value = JSON.parse(valueString);
+        let value = JSON.parse(valueString); //an array of objects
+
+        value.sort((a, b) => a.num - b.num);
+     
         for (let i = 0; i<value.length; i++)
         {
-            console.log(`${i+1}) ${value[i].player}`);
             loadSession(value[i]);
-           
+       
         }
     }
     
@@ -55,9 +56,25 @@ document.addEventListener('DOMContentLoaded', function() {
 
     //listen for when user submits their bet
     document.querySelector('#submit_button').addEventListener('click', () => get_player_teamID());
+    document.querySelector('#clear_button').addEventListener('click', () => clearSession());
+
   });
 
-
+  function clearSession()
+  {
+    //clear bets button clicked, clear session
+    if (confirm('Are you sure you want to clear all your bets?'))
+    {
+        sessionStorage.clear();
+        location.reload()
+    }
+    else
+    {
+        return;
+    }
+    
+   
+  }
 
   //filters player array based on user input
   function filterData(data, searchText)
@@ -169,6 +186,9 @@ document.addEventListener('DOMContentLoaded', function() {
         const menu = document.querySelector('#menu').value;
         let update;
         let period_interval, period_time, convertedTime;
+        let away_score, homeTeam, awayTeam;
+        let home_score;
+        let whos_winning;
 
         fetch(`https://statsapi.web.nhl.com/api/v1/game/${gameID}/feed/live`)
         .then(response => response.json())
@@ -194,6 +214,11 @@ document.addEventListener('DOMContentLoaded', function() {
             {
                 period_interval = all_plays[all_plays.length-1].about.period
                 period_time = all_plays[all_plays.length-1].about.periodTimeRemaining
+                away_score = all_plays[all_plays.length-1].about.goals['away']
+                home_score = all_plays[all_plays.length-1].about.goals['home']
+                awayTeam = data.gameData.teams.away['abbreviation']
+                homeTeam = data.gameData.teams.home['abbreviation']
+          
             }
             catch(err)
             {
@@ -213,6 +238,10 @@ document.addEventListener('DOMContentLoaded', function() {
             
                 
             }
+
+            whos_winning = whosWinning(awayTeam, homeTeam, away_score, home_score);
+        
+            
             // Loop through the away and home teams
        
             for (const entry in teams) 
@@ -239,7 +268,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }//for loop close
             
             
-            loadPlayer(update, playerID, period_interval, period_time, convertedTime);
+            loadPlayer(update, playerID, period_interval, period_time, convertedTime, away_score, home_score, whos_winning);
 
         })//then data close
     }// get_player_data close
@@ -257,8 +286,10 @@ function loadSession(obj)
     let playerID, teamID;
     let gameID, entry;
     let update;
-    let period_interval, period_time, convertedTime;
-    
+    let period_interval, period_time, convertedTime; 
+    let away_score, homeTeam, awayTeam;
+    let home_score;
+    let whos_winning;
 
     let userData = {
         player: human, //player
@@ -316,17 +347,22 @@ function loadSession(obj)
                 const liveData = data3.liveData;
                 const boxscore = liveData.boxscore;
                 const teams = boxscore.teams;
-
+                //console.log(data3)
                 //get period variables
                 plays = liveData.plays
                 all_plays = plays.allPlays
-    
-                //we only care about the most recent time/period here, therefore take last entry in all_plays array
-                //if game didnt start yet, these entries dont exist yet
+                //console.log(all_plays)
+
+                //this block gets the period & game time, as well as score, home and away team
                 try
                 {
                     period_interval = all_plays[all_plays.length-1].about.period
                     period_time = all_plays[all_plays.length-1].about.periodTimeRemaining
+                    away_score = all_plays[all_plays.length-1].about.goals['away']
+                    home_score = all_plays[all_plays.length-1].about.goals['home']
+                    awayTeam = data3.gameData.teams.away['abbreviation']
+                    homeTeam = data3.gameData.teams.home['abbreviation']
+                    
                 }
                 catch(err)
                 {
@@ -346,6 +382,9 @@ function loadSession(obj)
                 
                     
                 }
+                //this var holds the abbreviation of the team thats winning, if tied, its an empty string
+                whos_winning = whosWinning(awayTeam, homeTeam, away_score, home_score);
+                //console.log(whos_winning);
 
                 // Loop through the away and home teams
                 for (const entry in teams) //this loop gets the stat we wanna track i.e shots, assists etc
@@ -391,7 +430,6 @@ function loadSession(obj)
                 //add border to each entry & format
                 entry2.classList.add('bet_border');
 
-
                 //player image
                 const imgElement = document.createElement('img');
                 imgElement.src = `http://nhl.bamcontent.com/images/headshots/current/168x168/${playerID}.jpg`;
@@ -407,7 +445,7 @@ function loadSession(obj)
                 //end of game
                 if (parseInt(period_interval) == 3 && period_time == '00:00')
                 {
-                    period.innerHTML = `<strong>Game Over</strong>`
+                    period.innerHTML = `<strong>Final: ${home_score}-${away_score} ${whos_winning}</strong>`
                 }
                 //game didnt start yet
                 else if (period_interval == undefined)
@@ -416,7 +454,8 @@ function loadSession(obj)
                 }
                 else
                 {
-                    period.innerHTML = `<br>Period: <strong>${period_interval}</strong> <br> Time Remaining: <strong>${period_time}</strong>`
+                    //console.log(`its this ${period_interval}, ${period_time}`)
+                    period.innerHTML = `<br>Period: <strong>${period_interval}</strong> <br> Time Remaining: <strong>${period_time}</strong> <br> Score: <strong> ${home_score}-${away_score} ${whos_winning}</strong>` //add here whos winning
                 }
                 
                 period.classList.add('period_entry')
@@ -446,9 +485,10 @@ function loadSession(obj)
                 entry2.appendChild(x);
                 
 
-                let key = sessionStorage.key(0);
+                let key = sessionStorage.key(1);
                 let valueString = sessionStorage.getItem(key);
                 let value = JSON.parse(valueString);
+                
 
                 x.addEventListener('click', function() {
                     // Code to be executed when the button is clicked
@@ -485,8 +525,24 @@ function loadSession(obj)
 
 
 //new bet, renders html to display new bet
-  function loadPlayer(update, playerID, period_interval, period_time, convertedTime)
+  function loadPlayer(update, playerID, period_interval, period_time, convertedTime, away_score, home_score, whos_winning)
   {
+
+    let a = sessionStorage.key(1);
+    let b = sessionStorage.getItem(a);
+    let c = JSON.parse(b);
+    
+    var checking; //our variable which will show us the order of entry in session
+    try
+    {
+        checking = c.length+1;
+    }
+    catch(err)
+    {
+        //this means its our first entry in the session, assign checking val of 1
+        checking=1
+    }
+
     const human = document.querySelector('#player').value; //specified player
     const menu = document.querySelector('#menu').value; //shots? goals? assists?
     const wager = document.querySelector('#wager').value; //over or under?
@@ -494,6 +550,7 @@ function loadSession(obj)
 
 
     let userData = {
+        num:checking,//will help us with the random order issue hopefully, sort based on this property 
         player: human, //player
         menu: menu, //what stat were betting on
         wager: wager, //over or under
@@ -531,13 +588,11 @@ function loadSession(obj)
     // Set the inner HTML of the bet data div which is a child of the entry div 
     data.innerHTML = `<strong style=font-size:large;> ${human} &nbsp</strong> <strong> &nbsp</strong><span style=font-size:large;> ${wager}${val} &nbsp<span style= text-transform:capitalize;>${menu}</span></span>`;
     data.classList.add('bet_entry');
-
-    //NEEED TO FIX HERE, NEED TO ADD TO THIS FUNCTION WHAT PERIOD_INTERVAL IS, ETC BY PASSING DOWN FROM OTHER FUNCTIONS PROBABLY
                 
     //end of game
     if (parseInt(period_interval) == 3 && period_time == '00:00')
     {
-        period.innerHTML = `<strong>Game Over</strong>`
+        period.innerHTML = `<strong>Final: ${home_score}-${away_score} ${whos_winning}</strong>`
     }
     //game didnt start yet
     else if (period_interval == undefined)
@@ -546,7 +601,7 @@ function loadSession(obj)
     }
     else
     {
-        period.innerHTML = `<br>Period: <strong>${period_interval}</strong> <br> Time Remaining: <strong>${period_time}</strong>`
+        period.innerHTML = `<br>Period: <strong>${period_interval}</strong> <br> Time Remaining: <strong>${period_time}</strong> <br> Score: <strong> ${home_score}-${away_score} ${whos_winning}</strong>` //add here whos winning
     }
     
     period.classList.add('period_entry')
@@ -579,12 +634,11 @@ function loadSession(obj)
 
    // Convert the object to a JSON string and store it in sessionStorage, stores the entire array in sessionStorage
    sessionStorage.setItem('sesh', JSON.stringify(session));
+ 
 
-   let key = sessionStorage.key(0);
+   let key = sessionStorage.key(1);
    let valueString = sessionStorage.getItem(key);
    let value = JSON.parse(valueString);
-
-   console.log(`here: ${valueString}`)
    
    x.addEventListener('click', function() {
        // Code to be executed when the button is clicked
@@ -617,6 +671,8 @@ function loadSession(obj)
   }//function close
 
 
+  //helper functions
+
 
   //function which helps us get the time of the game
   function convertTimeToTimeZone(timeString, originalTimeZone, targetTimeZone) 
@@ -634,6 +690,31 @@ function loadSession(obj)
     const targetTimeString = targetDate.toLocaleTimeString([], { timeZoneName: 'short', hour: '2-digit', minute: '2-digit' });
 
     return targetTimeString;
+}
+
+function whosWinning(awayTeam, homeTeam, awayScore, homeScore)
+{
+    awayScore = parseInt(awayScore);
+    homeScore = parseInt(homeScore);
+    //this function knows who the away and home team are and what the score is. if tied return empty string
+    if (awayScore == homeScore)
+    {
+        //games tied, show no team
+        return '';
+    }
+    else
+    {
+        //if not tied, someones winning, find out who
+        if (awayScore>homeScore)
+        {
+            return awayTeam;
+        }
+
+        else if(homeScore > awayScore)
+        {
+            return homeTeam;
+        }
+    }
 }
 
  
