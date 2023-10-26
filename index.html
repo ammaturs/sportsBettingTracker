@@ -14,15 +14,14 @@
                 <p class="lead">
                     How it works: You've placed a bet on any sportsbook. You come here to track it live. Input the player name, stat and bet you want to track. We'll do the rest. Good Luck!
                 </p>
-                <h1>Pucken Bets</h1>      
+                <h1>Pucken Bets</h1>  
             </div>
             <div class="bet">
                 <div class="dropdown">
                     <input required placeholder = 'Player' type="input" class="form-control" id="player"><br>
-                    <ul class = 'autocomplete-list' style = 'display:none;'></ul>
-                    
+                    <ul class = 'autocomplete-list' style = 'display:none;'></ul>     
                 </div>
-
+<!-- add clear menu & bet slip buttons-->
                 <select required class="form-select form-select-sm" id="menu"  aria-label=".form-select-sm example">
                     <option value ='What are we betting on?' id="q" disabled selected>Bet</option>
                     <option value="points">Points</option>
@@ -38,7 +37,9 @@
                 <input required placeholder = 'Amount' type="input" class="form-control" id="stat">
             </div>
             <div class = 'submit_button'>
+                <button id = clear_button type="button" class="btn btn-outline-secondary">Clear bets</button>
                 <button id='submit_button' type="submit" class="btn btn-primary mb-2">Let's Watch!</button>
+
             </div>  
         </div><br>
         <div class="bets"></div></div><br>
